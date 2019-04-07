@@ -1,0 +1,12 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# dependencies (NodeJS, npm, etc)
+/node_modules
+npm-debug.log*
+
+# production
+/build
+.next/
+
+# misc
+.DS_Store
