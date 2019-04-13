@@ -1,6 +1,5 @@
 <template>
   <div>
-    <nuxt />
     <section class="container-fluid">
       <div>
         <b-navbar toggleable="lg" type="dark" variant="info">
@@ -22,7 +21,7 @@
                 <!-- Using 'button-content' slot -->
                 <template slot="button-content">
                   <em>
-                    <font-awesome-icon icon="user" /> User
+                    <font-awesome-icon icon="user" /> {{ name }}
                   </em>
                 </template>
                 <b-dropdown-item href="#">
@@ -37,19 +36,24 @@
         </b-navbar>
       </div>
     </section>
+    <nuxt />
   </div>
 </template>
 
+<script>
+export default {
+  layout: 'nav',
+  computed: {
+    // display the item from store state.
+    name() {
+      return 'Karim'
+    }
+  }
+}
+</script>
 <style>
 .container-fluid {
   margin: 0 auto;
   padding: 0;
-}
-
-.sub-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
 }
 </style>

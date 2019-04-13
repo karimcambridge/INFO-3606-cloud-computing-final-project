@@ -7,6 +7,3 @@ export default {
   layout: 'nav'
 }
 </script>
-
-<style>
-</style>
