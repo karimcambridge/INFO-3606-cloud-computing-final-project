@@ -1,4 +1,4 @@
-# final-project
+# Smart Cloud Board
 
 > Group 6 INFO 3606 Final Project
 
@@ -19,8 +19,14 @@ $ npm start
 $ npm run generate
 ```
 
+## Credits
+
 > Build with ❤️ using [Nuxt.js](https://nuxtjs.org) and various other tools
 
+	- Vue.js
 	- bootstrap-vue
+	- fontawesome
 	- sequelize
 	- sqlite3
+
+> [Maya Bannis](https://github.com/Mibzahoy) for the idea
