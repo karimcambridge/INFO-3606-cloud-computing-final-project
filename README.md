@@ -19,4 +19,8 @@ $ npm start
 $ npm run generate
 ```
 
-For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
+> Build with ❤️ using [Nuxt.js](https://nuxtjs.org) and various other tools
+
+	- bootstrap-vue
+	- sequelize
+	- sqlite3
