@@ -23,10 +23,10 @@ $ npm run generate
 
 > Build with ❤️ using [Nuxt.js](https://nuxtjs.org) and various other tools
 
-	- Vue.js
-	- bootstrap-vue
-	- fontawesome
-	- sequelize
-	- sqlite3
+	* Vue.js
+	* bootstrap-vue
+	* fontawesome
+	* sequelize
+	* sqlite3
 
 > [Maya Bannis](https://github.com/Mibzahoy) for the idea
