@@ -45,17 +45,19 @@ module.exports = function (sequelize, DataTypes) {
     paranoid: true
   })
 
-  User.associate = function (models) {
-    User.belongsTo(models.Role, {
-      as: 'role',
-      foreignKey: 'role_id',
-      sourceKey: 'id'
-    })
-    User.hasMany(models.File, {
-      as: 'files',
-      foreignKey: 'user_id'
-    })
-  }
+  User.findByLogin = async login => {
+    let user = await User.findOne({
+      where: { username: login },
+    });
+
+    if (!user) {
+      user = await User.findOne({
+        where: { email: login },
+      });
+    }
+
+    return user;
+  };
 
   return User
 };
