@@ -12,13 +12,32 @@
         >Source</a>
       </div>
     </div>
+    <div class="movie" v-if="movie">
+      <img :src="movie.Poster">
+      <h1>{{ movie.Title }}</h1>
+      <h3>{{ movie.Year }}</h3>
+      <button @click="getRandomMovie">Get Random Movie</button>
+    </div>
   </section>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
-  layout: 'nav'
-}
+  layout: 'nav',
+  asyncData({ params }) {
+    return axios.get(`http://localhost:3000/server/api/random-movie`).then(res => {
+      return { movie: res.data };
+    })
+  },
+  methods: {
+    getRandomMovie() {
+      axios.get(`server/api/random-movie`).then(res => {
+        this.movie = res.data;
+      })
+    }
+  }
+};
 </script>
 
 <style>

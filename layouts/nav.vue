@@ -46,10 +46,10 @@ export default {
   computed: {
     // display the item from store state.
     name() {
-      return 'Karim'
+      return 'Karim';
     }
   }
-}
+};
 </script>
 <style>
 .container-fluid {

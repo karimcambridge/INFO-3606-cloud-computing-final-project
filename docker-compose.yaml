@@ -3,11 +3,11 @@ services:
   dev:
     image: node:11
     volumes:
-      - nodemodules:/usr/src/service/node_modules
-      - .:/usr/src/service
+      - nodemodules:/usr/src/app/node_modules
+      - .:/usr/src/app
     environment:
       - NODE_ENV=development
-    working_dir: /usr/src/service
+    working_dir: /usr/src/app
     command: npm run dev
     ports:
       - 3000:3000

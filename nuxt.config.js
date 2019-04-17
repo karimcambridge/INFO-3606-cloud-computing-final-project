@@ -64,5 +64,6 @@ export default {
         })
       }
     }
-  }
+  },
+  serverMiddleware: ['~/server/api/index.js']
 }
