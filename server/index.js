@@ -6,15 +6,20 @@ const database = new Sequelize({
 })
 
 const models = {
-  User: sequelize.import('./models/user'),
+  User: database.import('./models/user'),
 };
 
 Object.keys(models).forEach(key => {
-  if ('associate' in models[key]) {
+  if('associate' in models[key]) {
     models[key].associate(models);
   }
 });
 
-export { sequelize };
+database.sync({ force: true })
+	.then(() => {
+		console.log(`[DATABASE]: Loaded.`)
+	});
+
+export { database };
 
 export default models;
