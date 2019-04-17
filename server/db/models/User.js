@@ -7,11 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true
     },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    lastname: {
+    username: {
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -58,6 +54,12 @@ module.exports = (sequelize, DataTypes) => {
 
     return user;
   };
+
+  User.addHook("afterUpdate", (instance) => {
+    if (instance.context && instance.context.user) {
+      console.log("A user was changed by " + instance.context.user.id);
+    }
+  });
 
   return User
 };

@@ -27,7 +27,9 @@
     "nuxt": "^2.6.2",
     "sequelize": "^5.5.1",
     "sequelize-cli": "^5.4.0",
-    "sqlite3": "^4.0.6"
+    "sqlite3": "^4.0.6",
+    "vuex": "^3.1.0",
+    "vuex-persistedstate": "^2.5.4"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^0.0.1",

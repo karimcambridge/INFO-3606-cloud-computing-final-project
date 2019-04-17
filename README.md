@@ -27,6 +27,8 @@
 > Build with ❤️ using [Nuxt.js](https://nuxtjs.org) and various other tools
 
 * Vue.js
+* VueX
+* VueX-persistantstate
 * bootstrap-vue
 * fontawesome
 * sequelize & sequelize-cli

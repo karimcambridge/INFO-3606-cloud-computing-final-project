@@ -20,9 +20,16 @@
               <b-nav-item-dropdown right>
                 <!-- Using 'button-content' slot -->
                 <template slot="button-content">
+                  <div v-if="user">
                   <em>
-                    <font-awesome-icon icon="user" /> {{ name }}
+                    <font-awesome-icon icon="user" /> {{ user.username }}
                   </em>
+                  </div>
+                  <div v-else>
+                    <em>
+                      <font-awesome-icon icon="user" /> Login / Sign Up
+                    </em>
+                  </div>
                 </template>
                 <b-dropdown-item href="#">
                   Profile
@@ -43,6 +50,11 @@
 <script>
 export default {
   layout: 'nav',
+  asyncData({ params }) {
+    return axios.get(`http://localhost:3000/server/api/get-user`).then(res => {
+      return { user: res.data };
+    })
+  },
   computed: {
     // display the item from store state.
     name() {

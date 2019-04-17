@@ -12,6 +12,10 @@
         >Source</a>
       </div>
     </div>
+    <!--<div v-if="user">
+      <h1>{{ user.username }}</h1>
+      <button @click="getCurrentUser">Get All Users</button>
+    </div>-->
     <div class="movie" v-if="movie">
       <img :src="movie.Poster">
       <h1>{{ movie.Title }}</h1>
@@ -34,6 +38,11 @@ export default {
     getRandomMovie() {
       axios.get(`server/api/random-movie`).then(res => {
         this.movie = res.data;
+      })
+    },
+    getCurrentUser() {
+      axios.get(`server/api/get-user`).then(res => {
+        this.user = res.data;
       })
     }
   }

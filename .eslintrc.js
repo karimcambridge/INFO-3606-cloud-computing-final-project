@@ -13,11 +13,12 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
-    "semi": 1,
+    "semi": 0,
     "arrow-parens": 0,
     "space-before-blocks": 0,
     "quotes": 0,
     "no-extra-semi": 0,
+    "no-new": 0,
     "indent": 0,
     "block-scoped-var": 2,
     "class-methods-use-this": 2,
