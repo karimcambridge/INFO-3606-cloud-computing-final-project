@@ -8,8 +8,8 @@
 # install dependencies
 * npm install
 
-# initialise sequelise
-* node_modules/.bin/sequelize init
+# initialise database
+* npm run migration
 
 # serve with hot reload at localhost:3000
 * npm run dev

@@ -31,6 +31,11 @@ Object.keys(db).forEach(modelName => {
   }
 });
 
+sequelize.sync({ force: true })
+  .then(() => {
+    console.log(`[DATABASE]: Loaded.`)
+  });
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
