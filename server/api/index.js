@@ -26,7 +26,7 @@ app.get('/get-all-users', async (req, res, next) => {
 
 app.get('/auth/user', async (req, res, next) => {
     const { login, password } = req.body;
-    console.log(`User load attempt: ${{ login, password }}`);
+    console.log(`User load attempt: login: ${login} password: ${password}`);
     return db.User.findByLogin(login, password)
         .then(user => {
             if (user) {
@@ -46,11 +46,9 @@ app.post('/auth/login', async (req, res, next) => {
     await db.User.findByLogin(login, password)
         .then(user => {
             if (!user) {
-                console.log(`${login} entered wrong credentials on login.`);
+                console.log(`${login} entered wrong credentials on login. ${user}`);
             } else {
-                // this.$storage.setState('loggedIn', true);
-                // this.$storage.setState('user', user);
-                console.log(`User ${login} logged in successfully.`);
+                console.log(`User ${login} logged in successfully. ${user}`);
             }
             return res.send(user);
         })

@@ -84,12 +84,16 @@ export default {
               }
             });
             console.log('Registered!');
+            console.log(this.$auth.token)
+            console.log(this.$auth.loggedIn)
             this.$router.push('/')
           }).catch(err => {
             console.log('Registration failed: ' + err.response.data.error.message)
+            this.$toast.warning('Registration failed, please try again', {icon: "error"});
           })
       } catch (e) {
         console.log('Error registering');
+        this.$toast.error('Registration error, please try again', {icon: "error"});
       }
     }
   }

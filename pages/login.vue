@@ -67,7 +67,6 @@ export default {
           this.$toast.error('Logging in failed, please try again', {icon: "error_outline"});
         });
         if (this.$auth.loggedIn) {
-          this.$auth.setToken('dummy');
           this.$toast.success('Successfully Logged In', {icon: "done"});
         } else {
           this.$toast.warning('Invalid credentials, please try again', {icon: "clear"});
