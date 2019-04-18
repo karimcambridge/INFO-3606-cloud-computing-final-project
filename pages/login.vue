@@ -24,7 +24,7 @@
             v-model="password"
             type="text"
             class="fadeIn third"
-            name="login"
+            name="password"
             placeholder="password"
           >
           <input
@@ -48,6 +48,7 @@
 <script>
 export default {
   layout: 'nav',
+  middleware: 'guest',
   data() {
     return {
       login: '',
@@ -55,16 +56,24 @@ export default {
     }
   },
   methods: {
-    loginForm: async function () {
+    async loginForm() {
       try {
-        console.log({ login: this.login, password: this.password });
-        await this.$axios.$post(`server/api/get-user`, {
+        await this.$auth.loginWith('local', {
+          data: {
             login: this.login,
             password: this.password
-        })
-        this.$router.push('/')
+          }
+        }).catch(e => {
+          this.$toast.error('Logging in failed, please try again', {icon: "error_outline"});
+        });
+        if (this.$auth.loggedIn) {
+          this.$auth.setToken('dummy');
+          this.$toast.success('Successfully Logged In', {icon: "done"});
+        } else {
+          this.$toast.warning('Invalid credentials, please try again', {icon: "clear"});
+        }
       } catch (e) {
-        console.log('Error logging in');
+        this.$toast.error('Invalid credentials, please try again', {icon: "error"});
       }
     }
   }

@@ -26,14 +26,14 @@ module.exports = (sequelize, DataTypes) => {
     paranoid: true
   })
 
-  User.findByLogin = async login => {
+  User.findByLogin = async (login, password) => {
     let user = await User.findOne({
-      where: { username: login },
+      where: { username: login, password: password }
     });
 
     if (!user) {
       user = await User.findOne({
-        where: { email: login },
+        where: { email: login, password: password }
       });
     }
 

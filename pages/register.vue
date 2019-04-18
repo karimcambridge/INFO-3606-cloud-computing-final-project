@@ -60,6 +60,7 @@
 <script>
 export default {
   layout: 'nav',
+  middleware: 'guest',
   data() {
     return {
       username: '',
@@ -68,14 +69,20 @@ export default {
     }
   },
   methods: {
-    registerForm: function () {
+    async registerForm() {
       try {
         console.log({ username: this.username, email: this.email, password: this.password });
-        this.$axios.$post(`server/api/register`, {
+        await this.$axios.$post(`server/api/auth/register`, {
             username: this.username,
             email: this.email,
             password: this.password
-          }).then(response => {
+          }).then(async response => {
+            await this.$auth.loginWith('local', {
+              data: {
+                login: this.username,
+                password: this.password
+              }
+            });
             console.log('Registered!');
             this.$router.push('/')
           }).catch(err => {

@@ -24,13 +24,13 @@
                     <em>
                       <font-awesome-icon icon="user" /> {{ loggedInUser.username }}
                     </em>
-                    <b-dropdown-item href="#">
-                      Profile
-                    </b-dropdown-item>
-                    <b-dropdown-item href="#">
-                      Sign Out
-                    </b-dropdown-item>
                   </template>
+                  <b-dropdown-item href="#">
+                    Profile
+                  </b-dropdown-item>
+                  <b-dropdown-item @click="logout">
+                    Sign Out
+                  </b-dropdown-item>
                 </b-nav-item-dropdown>
               </div>
               <div v-else>
@@ -48,12 +48,17 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex';
 
 export default {
   layout: 'nav',
   computed: {
     ...mapGetters(['isAuthenticated', 'loggedInUser'])
+  },
+  methods: {
+    async logout() {
+      await this.$auth.logout();
+    }
   }
 };
 </script>

@@ -14,14 +14,20 @@ export default {
       { hid: 'description', name: 'description', content: pkg.description }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }
     ]
   },
 
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#fff' },
+  loading: {
+    name: 'chasing-dots',
+    color: '#ff5638',
+    background: 'white',
+    height: '4px'
+  },
 
   /*
   ** Global CSS
@@ -45,7 +51,8 @@ export default {
     'bootstrap-vue/nuxt',
     '@nuxtjs/pwa',
     '@nuxtjs/axios',
-    '@nuxtjs/auth'
+    '@nuxtjs/auth',
+    '@nuxtjs/toast'
   ],
 
   /*
@@ -76,11 +83,22 @@ export default {
     strategies: {
       local: {
         endpoints: {
-          login: { url: 'login', method: 'post', propertyName: 'data.token' },
-          user: { url: 'me', method: 'get', propertyName: 'data' },
-          logout: false
-        }
+          login: { url: '/server/api/auth/login', method: 'post', propertyName: 'token' },
+          logout: { url: '/server/api/auth/logout', method: 'post' },
+          user: { url: '/server/api/auth/user', method: 'get', propertyName: false }
+        },
+        tokenRequired: true,
+        tokenType: 'Bearer'
       }
+    },
+    redirect: {
+      login: '/',
+      logout: '/'
     }
+  },
+
+  toast: {
+    position: 'bottom-center',
+    duration: 3000
   }
 }

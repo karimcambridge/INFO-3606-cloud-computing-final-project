@@ -11,14 +11,39 @@
           class="button--blue"
         >Source</a>
       </div>
-      <div v-if="loggedInUser">
-        <h1>{{ loggedInUser.username }}</h1>
-        <button @click="getAllUsers">
-          Get All Users
-        </button>
-        <div v-if="users">
-          <h1>{{ users[0].username }}</h1>
+    </div>
+    <div class="row card-display">
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">MODEL IT ALL</h5>
+            <p class="card-text">AWS CloudFormation allows you to model your entire infrastructure in a text file. This template becomes the single source of truth for your infrastructure. This helps you to standardize infrastructure components used across your organization, enabling configuration compliance and faster troubleshooting.</p>
+          </div>
         </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">AUTOMATE AND DEPLOY</h5>
+            <p class="card-text">AWS CloudFormation provisions your resources in a safe, repeatable manner, allowing you to build and rebuild your infrastructure and applications, without having to perform manual actions or write custom scripts. CloudFormation takes care of determining the right operations to perform when managing your stack, and rolls back changes automatically if errors are detected.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">IT'S JUST CODE</h5>
+            <p class="card-text">Codifying your infrastructure allows you to treat your infrastructure as just code. You can author it with any code editor, check it into a version control system, and review the files with team members before deploying into production.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div v-if="loggedInUser">
+      <button @click="getAllUsers">
+        Get All Users
+      </button>
+      <div v-if="users">
+        <h1>{{ users[0].username }}</h1>
       </div>
     </div>
   </section>
@@ -53,14 +78,15 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
+  display: block;
 }
 
 .header {
   min-height: 5vh;
+  margin-bottom: 2vh;
 }
 
 .title {
-  display: block;
   font-weight: 300;
   font-size: 100px;
   color: #35495e;
@@ -72,5 +98,9 @@ export default {
   color: #526488;
   word-spacing: 5px;
   padding-bottom: 15px;
+}
+
+.card-display {
+  padding-bottom: 2vh;
 }
 </style>

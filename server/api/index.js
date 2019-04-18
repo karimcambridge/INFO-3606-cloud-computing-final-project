@@ -14,17 +14,6 @@ app.get('/', (req, res, next) => {
     res.send('API root');
 })
 
-app.get('/get-user', async (req, res, next) => {
-    console.log('get-user ' + JSON.stringify(req));
-    const { login, password } = req.body;
-    return db.User.findByLogin(login)
-        .then(user => res.send(user))
-        .catch(err => {
-            console.log('[ERROR; SQL]: ', JSON.stringify(err))
-            return res.send(err)
-        });
-})
-
 app.get('/get-all-users', async (req, res, next) => {
     console.log('get-all-users ' + JSON.stringify(req));
     return db.User.findAll()
@@ -35,7 +24,43 @@ app.get('/get-all-users', async (req, res, next) => {
         });
 })
 
-app.post('/register', (req, res, next) => {
+app.get('/auth/user', async (req, res, next) => {
+    const { login, password } = req.body;
+    console.log(`User load attempt: ${{ login, password }}`);
+    return db.User.findByLogin(login, password)
+        .then(user => {
+            if (user) {
+                console.log(`User ${login} loaded successfully.`);
+                return res.send(user);
+            }
+        })
+        .catch(err => {
+            console.log(`[ERROR; SQL]: User: ${err}`)
+            return res.send(err)
+        });
+})
+
+app.post('/auth/login', async (req, res, next) => {
+    const { login, password } = req.body;
+    console.log({ login, password });
+    await db.User.findByLogin(login, password)
+        .then(user => {
+            if (!user) {
+                console.log(`${login} entered wrong credentials on login.`);
+            } else {
+                // this.$storage.setState('loggedIn', true);
+                // this.$storage.setState('user', user);
+                console.log(`User ${login} logged in successfully.`);
+            }
+            return res.send(user);
+        })
+        .catch(err => {
+            console.log(`[ERROR; SQL]: Authentication: ${err}`)
+            return res.send(err)
+        });
+})
+
+app.post('/auth/register', (req, res, next) => {
     const { username, email, password } = req.body;
     console.log({ username, email, password });
     db.User.create({
@@ -48,9 +73,13 @@ app.post('/register', (req, res, next) => {
             res.send(user);
         })
         .catch(err => {
-            console.log('[ERROR; SQL]: User creation: ' + JSON.stringify(err))
+            console.log(`[ERROR; SQL]: Registration: ${err}`)
             return res.status(400).send(err)
         })
+})
+
+app.post('/auth/logout', (req, res, next) => {
+    res.json({ status: 'OK' })
 })
 
 // export the server middleware

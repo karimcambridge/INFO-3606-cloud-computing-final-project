@@ -28,6 +28,7 @@ module.exports = {
     "no-unused-expressions": 2,
     "no-undef": 0,
     "no-unused-vars": 1,
-    "no-console": 0
+    "no-console": 0,
+    "object-curly-spacing": 0
   }
 }
