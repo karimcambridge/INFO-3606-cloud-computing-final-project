@@ -68,17 +68,19 @@ export default {
     }
   },
   methods: {
-    registerForm: async function () {
+    registerForm: function () {
       try {
         console.log({ username: this.username, email: this.email, password: this.password });
-        await this.$axios.$post(`server/api/register`, {
+        this.$axios.$post(`server/api/register`, {
             username: this.username,
             email: this.email,
             password: this.password
-        }).then((response) => {
+          }).then(response => {
             console.log('Registered!');
+            this.$router.push('/')
+          }).catch(err => {
+            console.log('Registration failed: ' + err.response.data.error.message)
           })
-        this.$router.push('/')
       } catch (e) {
         console.log('Error registering');
       }
