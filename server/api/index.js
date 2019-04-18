@@ -1,7 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const app = express();
+const cookieParser = require('cookie-parser');
+const jwt = require('express-jwt');
+const jsonwebtoken = require('jsonwebtoken');
 const db = require('../db/models/index.js');
+
+const JWT_SECRET_NAME = 'secretcloudboard';
+
+const app = express();
+
+// parse cookies
+app.use(cookieParser());
 
 // parse application/json
 app.use(bodyParser.json());
@@ -14,17 +23,18 @@ app.get('/', (req, res, next) => {
     res.send('API root');
 })
 
-app.get('/get-all-users', async (req, res, next) => {
-    console.log('get-all-users ' + JSON.stringify(req));
+app.get('/get-all-users', (req, res, next) => {
+    console.log('get-all-users ' + req);
     return db.User.findAll()
         .then(users => res.send(users))
         .catch(err => {
-            console.log('[ERROR; SQL]: ', JSON.stringify(err))
+            console.log('[ERROR; SQL]: Get all users: ' + err);
             return res.send(err)
         });
 })
 
-app.get('/auth/user', async (req, res, next) => {
+app.get('/auth/user', (req, res, next) => {
+    /*
     const { login, password } = req.body;
     console.log(`User load attempt: login: ${login} password: ${password}`);
     return db.User.findByLogin(login, password)
@@ -38,6 +48,8 @@ app.get('/auth/user', async (req, res, next) => {
             console.log(`[ERROR; SQL]: User: ${err}`)
             return res.send(err)
         });
+    */
+    res.json({ user: req.user })
 })
 
 app.post('/auth/login', async (req, res, next) => {
@@ -47,14 +59,26 @@ app.post('/auth/login', async (req, res, next) => {
         .then(user => {
             if (!user) {
                 console.log(`${login} entered wrong credentials on login. ${user}`);
+                res.status(400).send(user);
             } else {
                 console.log(`User ${login} logged in successfully. ${user}`);
+                const accessToken = jsonwebtoken.sign(
+                    {
+                        username: user.username,
+                        email: user.email
+                    },
+                    JWT_SECRET_NAME
+                );
+                res.json({
+                    token: {
+                        accessToken
+                    }
+                });
             }
-            return res.send(user);
         })
         .catch(err => {
             console.log(`[ERROR; SQL]: Authentication: ${err}`)
-            return res.send(err)
+            res.status(400).send(err)
         });
 })
 
@@ -68,16 +92,33 @@ app.post('/auth/register', (req, res, next) => {
         })
         .then(user => {
             console.log('New user created successfully')
-            res.send(user);
+            const accessToken = jsonwebtoken.sign(
+                {
+                    username: user.username,
+                    email: user.email
+                },
+                JWT_SECRET_NAME
+            );
+            res.json({
+                token: {
+                    accessToken
+                }
+            });
         })
         .catch(err => {
             console.log(`[ERROR; SQL]: Registration: ${err}`)
-            return res.status(400).send(err)
+            res.status(400).send(err)
         })
 })
 
 app.post('/auth/logout', (req, res, next) => {
     res.json({ status: 'OK' })
+})
+
+// Error handler
+app.use((err, req, res, next) => {
+    console.error(err) // eslint-disable-line no-console
+    res.status(401).send(err + '')
 })
 
 // export the server middleware

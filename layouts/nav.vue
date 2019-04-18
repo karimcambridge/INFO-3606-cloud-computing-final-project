@@ -17,12 +17,12 @@
             </b-navbar-nav>
             <!-- Right aligned nav items -->
             <b-navbar-nav class="ml-auto">
-              <div v-if="isAuthenticated">
+              <div v-if="$auth.$state.loggedIn">
                 <b-nav-item-dropdown right>
                   <!-- Using 'button-content' slot -->
                   <template slot="button-content">
                     <em>
-                      <font-awesome-icon icon="user" /> {{ loggedInUser.username }}
+                      <font-awesome-icon icon="user" /> {{ $auth.user.username }}
                     </em>
                   </template>
                   <b-dropdown-item href="#">
@@ -48,13 +48,8 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-
 export default {
   layout: 'nav',
-  computed: {
-    ...mapGetters(['isAuthenticated', 'loggedInUser'])
-  },
   methods: {
     async logout() {
       await this.$auth.logout();
@@ -62,9 +57,6 @@ export default {
   }
 };
 </script>
+
 <style>
-.container-fluid {
-  margin: 0 auto;
-  padding: 0;
-}
 </style>

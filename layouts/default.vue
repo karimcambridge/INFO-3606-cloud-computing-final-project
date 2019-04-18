@@ -39,4 +39,41 @@ html {
   color: #fff;
   background-color: #4078c0;
 }
+
+.container-fluid {
+  margin: 0 auto;
+  padding: 0;
+}
+
+.sub-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  display: block;
+  padding-top: 4vh;
+}
+
+.card-display {
+  padding-bottom: 2vh;
+}
+
+.header {
+  min-height: 5vh;
+  margin-bottom: 2vh;
+}
+
+.title {
+  font-weight: 300;
+  font-size: 100px;
+  color: #35495e;
+}
+
+.subtitle {
+  font-weight: 300;
+  font-size: 42px;
+  color: #526488;
+  word-spacing: 5px;
+  padding-bottom: 15px;
+}
 </style>

@@ -50,7 +50,7 @@
         </div>
       </div>
     </div>
-    <div v-if="loggedInUser">
+    <div v-if="$auth.user">
       <button @click="getAllUsers">
         Get All Users
       </button>
@@ -61,26 +61,21 @@
       </div>
     </div>
     <h1>
-      {{ this.$auth.user }}
-      {{ $auth.state.loggedIn }}
+      {{ typeof $auth.user }}
+      {{ $auth.$state.loggedIn }}
       {{ $auth.loggedIn }}
-      {{ $store.state.auth.loggedIn }}
+      {{ typeof $auth.token }}
     </h1>
   </section>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 export default {
   layout: 'nav',
   data() {
     return {
       users: null
     }
-  },
-  computed: {
-    ...mapGetters(['isAuthenticated', 'loggedInUser'])
   },
   methods: {
     async getAllUsers() {
@@ -93,34 +88,4 @@ export default {
 </script>
 
 <style>
-.sub-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  display: block;
-}
-
-.header {
-  min-height: 5vh;
-  margin-bottom: 2vh;
-}
-
-.title {
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.card-display {
-  padding-bottom: 2vh;
-}
 </style>

@@ -64,12 +64,12 @@ export default {
             password: this.password
           }
         }).catch(e => {
-          this.$toast.error('Logging in failed, please try again', {icon: "error_outline"});
+          // this.$toast.error('Logging in failed, please try again', {icon: "error_outline"});
+          this.$toast.error('Invalid credentials, please try again', {icon: "clear"});
         });
-        if (this.$auth.loggedIn) {
+        if (this.$auth.$state.loggedIn) {
           this.$toast.success('Successfully Logged In', {icon: "done"});
-        } else {
-          this.$toast.warning('Invalid credentials, please try again', {icon: "clear"});
+          this.$router.push('/')
         }
       } catch (e) {
         this.$toast.error('Invalid credentials, please try again', {icon: "error"});

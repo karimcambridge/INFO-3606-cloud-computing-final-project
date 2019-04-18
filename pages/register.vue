@@ -70,31 +70,28 @@ export default {
   },
   methods: {
     async registerForm() {
-      try {
-        console.log({ username: this.username, email: this.email, password: this.password });
-        await this.$axios.$post(`server/api/auth/register`, {
-            username: this.username,
-            email: this.email,
-            password: this.password
-          }).then(async response => {
-            await this.$auth.loginWith('local', {
-              data: {
-                login: this.username,
-                password: this.password
-              }
-            });
+      console.log({ username: this.username, email: this.email, password: this.password });
+      await this.$axios.$post(`server/api/auth/register`, {
+          username: this.username,
+          email: this.email,
+          password: this.password
+        }).then(async response => {
+          await this.$auth.loginWith('local', {
+            data: {
+              login: this.username,
+              password: this.password
+            }
+          }).then(user => {
+            this.$toast.success('Registered successfully', {icon: "done"});
             console.log('Registered!');
-            console.log(this.$auth.token)
-            console.log(this.$auth.loggedIn)
+            console.log(this.$auth.user)
+            console.log(this.$auth.$state.loggedIn)
             this.$router.push('/')
-          }).catch(err => {
-            console.log('Registration failed: ' + err.response.data.error.message)
-            this.$toast.warning('Registration failed, please try again', {icon: "error"});
-          })
-      } catch (e) {
-        console.log('Error registering');
-        this.$toast.error('Registration error, please try again', {icon: "error"});
-      }
+          });
+        }).catch(err => {
+          console.log('Registration failed: ' + err) // .response.data.error.message
+          this.$toast.error('Registration failed, please try again', {icon: "error"});
+        });
     }
   }
 };
