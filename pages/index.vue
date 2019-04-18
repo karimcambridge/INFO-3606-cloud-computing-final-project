@@ -11,38 +11,37 @@
           class="button--blue"
         >Source</a>
       </div>
-    </div>
-    <!--<div v-if="user">
-      <h1>{{ user.username }}</h1>
-      <button @click="getCurrentUser">Get All Users</button>
-    </div>-->
-    <div class="movie" v-if="movie">
-      <img :src="movie.Poster">
-      <h1>{{ movie.Title }}</h1>
-      <h3>{{ movie.Year }}</h3>
-      <button @click="getRandomMovie">Get Random Movie</button>
+      <div v-if="user">
+        <h1>{{ user.username }}</h1>
+        <button @click="getAllUsers">
+          Get All Users
+        </button>
+        <div v-if="users">
+          <h1>{{ users[0].username }}</h1>
+        </div>
+      </div>
     </div>
   </section>
 </template>
 
 <script>
-import axios from 'axios';
 export default {
   layout: 'nav',
-  asyncData({ params }) {
-    return axios.get(`http://localhost:3000/server/api/random-movie`).then(res => {
-      return { movie: res.data };
+  data() {
+    return {
+      user: null,
+      users: null
+    }
+  },
+  asyncData({ $axios }) {
+    return $axios.get(`server/api/get-user`).then(res => {
+      return { user: res.data };
     })
   },
   methods: {
-    getRandomMovie() {
-      axios.get(`server/api/random-movie`).then(res => {
-        this.movie = res.data;
-      })
-    },
-    getCurrentUser() {
-      axios.get(`server/api/get-user`).then(res => {
-        this.user = res.data;
+    async getAllUsers() {
+      await this.$axios.$get(`server/api/get-all-users`).then(res => {
+        this.users = res.data;
       })
     }
   }

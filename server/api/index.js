@@ -1,36 +1,51 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
 const db = require('../db/index.js');
 
-app.get('/', (req, res, next) => {
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({
+    extended: true
+}))
+
+app.get('/', (req, res) => {
+    console.log('API root');
     res.send('API root');
 })
 
-app.get('/random-movie', async (req, res, next) => {
-    const axios = require('axios');
-    const movieOptions = [
-        'tt3896198',
-        'tt0071253',
-        'tt0109686',
-        'tt2267998',
-        'tt0109040',
-        'tt0089218'
-    ];
-    const movieID = movieOptions[Math.floor(Math.random() * movieOptions.length)];
-    const movie = await axios.get(
-        `https://www.omdbapi.com/?i=${movieID}&apikey=9733f1df`
-    );
-    res.json(movie.data);
-})
-
-app.get('/get-user', async (req, res, next) => {
-    return db.User.findByLogin('kar')
+app.get('/get-user', async (req, res) => {
+    console.log('get-user');
+    const { login, password } = req.body
+    return db.User.findByLogin(login)
         .then((user) => res.send(user))
         .catch((err) => {
             console.log('SQL ERROR: ', JSON.stringify(err))
             return res.send(err)
         });
 })
+
+app.get('/get-all-users', async (req, res) => {
+    console.log('get-all-users');
+    return db.User.findAll()
+        .then((user) => res.send(user))
+        .catch((err) => {
+            console.log('SQL ERROR: ', JSON.stringify(err))
+            return res.send(err)
+        });
+})
+
+app.post('/register', async (req, res) => {
+    const { username, email, password } = req.body
+    await db.User.create({ username, email, password }).then((user) => res.send(user))
+        .catch((err) => {
+            console.log('***There was an error creating a user', JSON.stringify(err))
+            return res.status(400).send(err)
+        })
+})
+
+app.listen(3000, () => {
+    console.log('API is listening on port 3000');
+});
 
 // export the server middleware
 module.exports = {

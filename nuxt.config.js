@@ -43,7 +43,9 @@ export default {
   modules: [
     // Doc: https://bootstrap-vue.js.org/docs/
     'bootstrap-vue/nuxt',
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    '@nuxtjs/axios',
+    '@nuxtjs/auth'
   ],
 
   /*
@@ -65,5 +67,18 @@ export default {
       }
     }
   },
-  serverMiddleware: ['~/server/api/index.js']
+
+  serverMiddleware: ['~/server/api/index.js'],
+
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: 'login', method: 'post', propertyName: 'data.token' },
+          user: { url: 'me', method: 'get', propertyName: 'data' },
+          logout: false
+        }
+      }
+    }
+  }
 }
