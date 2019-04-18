@@ -65,6 +65,7 @@
       {{ $auth.$state.loggedIn }}
       {{ $auth.loggedIn }}
       {{ typeof $auth.token }}
+      {{ loggedIn }}
     </h1>
   </section>
 </template>
@@ -74,7 +75,8 @@ export default {
   layout: 'nav',
   data() {
     return {
-      users: null
+      users: null,
+      loggedIn: false
     }
   },
   methods: {

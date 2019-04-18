@@ -87,6 +87,7 @@ export default {
             console.log(this.$auth.user)
             console.log(this.$auth.$state.loggedIn)
             this.$router.push('/')
+            this.loggedIn = true;
           });
         }).catch(err => {
           console.log('Registration failed: ' + err) // .response.data.error.message

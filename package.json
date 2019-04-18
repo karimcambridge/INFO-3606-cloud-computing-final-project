@@ -4,6 +4,8 @@
   "description": "Group 6 INFO 3606 Final Project",
   "author": "Group 6",
   "private": true,
+  "homepage": "https://github.com/karimcambridge/INFO-3606-cloud-computing-final-project#readme",
+  "bugs": "https://github.com/karimcambridge/INFO-3606-cloud-computing-final-project/issues",
   "scripts": {
     "dev": "nuxt dev -o --debug",
     "dev-debug": "node --debug node_modules/.bin/nuxt",
