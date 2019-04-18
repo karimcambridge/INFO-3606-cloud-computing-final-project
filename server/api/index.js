@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const db = require('../index.js');
+const db = require('../db/index.js');
 
 app.get('/', (req, res, next) => {
     console.log('API root');
@@ -28,7 +28,8 @@ app.get('/get-all-users', async (req, res) => {
         });
 })
 
-app.post('/register', async (req, res) => {
+app.post('/register', (req, res) => {
+    console.log('test ' + JSON.stringify(req.body));
     const { username, email, password } = req.body
     return db.User.create({ username, email, password }).then((user) => res.send(user))
         .catch((err) => {

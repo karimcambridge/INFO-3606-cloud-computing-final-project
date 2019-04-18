@@ -11,8 +11,8 @@
           class="button--blue"
         >Source</a>
       </div>
-      <div v-if="user">
-        <h1>{{ user.username }}</h1>
+      <div v-if="loggedInUser">
+        <h1>{{ loggedInUser.username }}</h1>
         <button @click="getAllUsers">
           Get All Users
         </button>
@@ -25,18 +25,17 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   layout: 'nav',
   data() {
     return {
-      user: null,
       users: null
     }
   },
-  asyncData({ $axios }) {
-    return $axios.get(`server/api/get-user`).then(res => {
-      return { user: res.data };
-    })
+  computed: {
+    ...mapGetters(['isAuthenticated', 'loggedInUser'])
   },
   methods: {
     async getAllUsers() {
