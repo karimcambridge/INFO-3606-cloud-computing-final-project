@@ -68,7 +68,9 @@ export default {
     }
   },
 
-  serverMiddleware: ['~/server/api/index.js'],
+  serverMiddleware: [
+    '~/server/api/index.js'
+  ],
 
   auth: {
     strategies: {

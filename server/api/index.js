@@ -1,14 +1,8 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const app = express();
-const db = require('../db/index.js');
+const db = require('../index.js');
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({
-    extended: true
-}))
-
-app.get('/', (req, res) => {
+app.get('/', (req, res, next) => {
     console.log('API root');
     res.send('API root');
 })
@@ -36,16 +30,12 @@ app.get('/get-all-users', async (req, res) => {
 
 app.post('/register', async (req, res) => {
     const { username, email, password } = req.body
-    await db.User.create({ username, email, password }).then((user) => res.send(user))
+    return db.User.create({ username, email, password }).then((user) => res.send(user))
         .catch((err) => {
             console.log('***There was an error creating a user', JSON.stringify(err))
             return res.status(400).send(err)
         })
 })
-
-app.listen(3000, () => {
-    console.log('API is listening on port 3000');
-});
 
 // export the server middleware
 module.exports = {
