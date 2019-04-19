@@ -23,33 +23,36 @@ app.get('/', (req, res, next) => {
     res.send('API root');
 })
 
-app.get('/get-all-users', (req, res, next) => {
+app.get('/get-all-users', async (req, res, next) => {
     console.log('get-all-users ' + req);
-    return db.User.findAll()
-        .then(users => res.send(users))
+    await db.User.findAll()
+        .then(users => {
+            res.json(users);
+            console.log('[API; get-all-users]: ' + JSON.stringify(users));
+        })
         .catch(err => {
             console.log('[ERROR; SQL]: Get all users: ' + err);
-            return res.send(err)
+            res.status(400).send(err);
         });
 })
 
 app.get('/auth/user', (req, res, next) => {
     /*
     const { login, password } = req.body;
-    console.log(`User load attempt: login: ${login} password: ${password}`);
-    return db.User.findByLogin(login, password)
+    console.log(`User load attempt: req.body: ${JSON.stringify(req.body)}`);
+    db.User.findByLogin(login, password)
         .then(user => {
             if (user) {
                 console.log(`User ${login} loaded successfully.`);
-                return res.send(user);
+                res.json({ user: req.user })
             }
         })
         .catch(err => {
             console.log(`[ERROR; SQL]: User: ${err}`)
-            return res.send(err)
+            res.send(err);
         });
     */
-    res.json({ user: req.user })
+   res.json( {user: { username: 'test', email: 'test@test.com' }} );
 })
 
 app.post('/auth/login', async (req, res, next) => {
@@ -78,7 +81,7 @@ app.post('/auth/login', async (req, res, next) => {
         })
         .catch(err => {
             console.log(`[ERROR; SQL]: Authentication: ${err}`)
-            res.status(400).send(err)
+            res.status(400).send(err);
         });
 })
 
@@ -106,8 +109,8 @@ app.post('/auth/register', (req, res, next) => {
             });
         })
         .catch(err => {
-            console.log(`[ERROR; SQL]: Registration: ${err}`)
-            res.status(400).send(err)
+            console.log(`[ERROR; SQL]: Registration: ${err}`);
+            res.status(400).send(err);
         })
 })
 
@@ -118,7 +121,7 @@ app.post('/auth/logout', (req, res, next) => {
 // Error handler
 app.use((err, req, res, next) => {
     console.error(err) // eslint-disable-line no-console
-    res.status(401).send(err + '')
+    res.status(401).send(err + '');
 })
 
 // export the server middleware

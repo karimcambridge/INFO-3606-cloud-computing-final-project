@@ -1,5 +1,5 @@
 <template>
-  <section class="sub-container">
+  <section class="container-fluid">
     <div class="wrapper fadeInDown">
       <div id="formContent">
         <!-- Tabs Titles -->
@@ -84,13 +84,12 @@ export default {
           }).then(user => {
             this.$toast.success('Registered successfully', {icon: "done"});
             console.log('Registered!');
-            console.log(this.$auth.user)
-            console.log(this.$auth.$state.loggedIn)
-            this.$router.push('/')
-            this.loggedIn = true;
+            console.log(this.$auth.user);
+            console.log(this.$auth.$state.loggedIn);
+            this.$router.push('/');
           });
         }).catch(err => {
-          console.log('Registration failed: ' + err) // .response.data.error.message
+          console.log('Registration failed: ' + err); // .response.data.error.message
           this.$toast.error('Registration failed, please try again', {icon: "error"});
         });
     }

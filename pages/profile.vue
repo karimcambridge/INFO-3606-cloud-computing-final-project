@@ -1,34 +1,30 @@
 <template>
-  <section class="section">
-    <div class="container">
-      <h2 class="title">
+  <section class="container-fluid">
+    <div class="header">
+      <h2 class="subtitle">
         My Profile
       </h2>
-      <div class="content">
-        <p>
-          <strong>
-            Username:
-          </strong>
-          {{ loggedInUser.username }}
-        </p>
-        <p>
-          <strong>
-            Email:
-          </strong>
-          {{ loggedInUser.email }}
-        </p>
-      </div>
+    </div>
+    <div class="content">
+      <p>
+        <strong>
+          Username:
+        </strong>
+        {{ $auth.user.username }}
+      </p>
+      <p>
+        <strong>
+          Email:
+        </strong>
+        {{ $auth.user.email }}
+      </p>
     </div>
   </section>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-
 export default {
-  middleware: 'auth',
-  computed: {
-    ...mapGetters(['loggedInUser'])
-  }
+  layout: 'nav',
+  middleware: 'auth'
 }
 </script>

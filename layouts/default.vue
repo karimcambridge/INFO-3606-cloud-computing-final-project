@@ -18,6 +18,15 @@ html {
   width: 100%;
 }
 
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
 *,
 *:before,
 *:after {
@@ -43,15 +52,12 @@ html {
 .container-fluid {
   margin: 0 auto;
   padding: 0;
-}
-
-.sub-container {
-  display: flex;
+  min-height: calc(100vh - 70px);
+  display: block;
+  flex: 1 0 auto;
   justify-content: center;
   align-items: center;
   text-align: center;
-  display: block;
-  padding-top: 4vh;
 }
 
 .card-display {
@@ -61,6 +67,7 @@ html {
 .header {
   min-height: 5vh;
   margin-bottom: 2vh;
+  padding-top: 4vh;
 }
 
 .title {
@@ -70,10 +77,19 @@ html {
 }
 
 .subtitle {
-  font-weight: 300;
+  font-weight: 400;
   font-size: 42px;
   color: #526488;
   word-spacing: 5px;
   padding-bottom: 15px;
+}
+
+.footer {
+  height: 50px;
+  flex-shrink: 0;
+  text-align: center;
+  color: #fff;
+  background-color: #222;
+  line-height: 6vh;
 }
 </style>

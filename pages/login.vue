@@ -1,5 +1,5 @@
 <template>
-  <section class="sub-container">
+  <section class="container-fluid sub-container">
     <div class="wrapper fadeInDown">
       <div id="formContent">
         <!-- Tabs Titles -->

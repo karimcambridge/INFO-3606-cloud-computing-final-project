@@ -1,5 +1,5 @@
 <template>
-  <section class="container-fluid sub-container">
+  <section class="container-fluid">
     <div class="header">
       <h2 class="subtitle">
         Packages
