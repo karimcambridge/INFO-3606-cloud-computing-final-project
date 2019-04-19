@@ -49,15 +49,12 @@ body {
   background-color: #4078c0;
 }
 
-.container-fluid {
+.container {
   margin: 0 auto;
   padding: 0;
   min-height: calc(100vh - 70px);
   display: block;
   flex: 1 0 auto;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
 }
 
 .card-display {
@@ -68,6 +65,9 @@ body {
   min-height: 5vh;
   margin-bottom: 2vh;
   padding-top: 4vh;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .title {
@@ -82,6 +82,21 @@ body {
   color: #526488;
   word-spacing: 5px;
   padding-bottom: 15px;
+}
+
+.content {
+  font-weight: 300;
+  color: #35495e;
+  padding-bottom: 15px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.card-header {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .footer {

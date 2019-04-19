@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid">
+  <div class="container">
     <h1 v-if="error.statusCode === 404">
       Page not found
     </h1>

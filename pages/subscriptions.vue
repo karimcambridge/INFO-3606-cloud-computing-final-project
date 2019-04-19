@@ -1,41 +1,48 @@
 <template>
-  <section class="container-fluid">
-    <div class="header">
-      <h2 class="subtitle">
-        Packages
-      </h2>
-    </div>
-    <div class="row card-display justify-content-center">
-      <div class="col-sm-8">
-        <div class="card bg-light">
-          <div class="card-header text-white bg-info">
-            <strong>
-              BASIC SCALABLE
-            </strong>
+  <section>
+    <div class="container">
+      <div class="header">
+        <h2 class="subtitle">
+          Packages
+        </h2>
+      </div>
+      <div class="row card-display justify-content-center">
+        <div class="col-sm-8">
+          <div class="card bg-light">
+            <div class="card-header text-white bg-info">
+              <strong>
+                BASIC SCALABLE
+              </strong>
+            </div>
+            <div class="card-body">
+              <p class="card-text">
+                <b-table :items="basicItems" />
+              </p>
+            </div>
           </div>
-          <div class="card-body">
-            <p class="card-text">
-              <b-table :items="basicItems" />
-            </p>
+        </div>
+      </div>
+      <div class="row card-display justify-content-center">
+        <div class="col-sm-8">
+          <div class="card bg-light">
+            <div class="card-header text-white bg-info">
+              <strong>
+                ENTERPRISE
+              </strong>
+            </div>
+            <div class="card-body">
+              <p class="card-text">
+                <b-table :items="enterpriseItems" />
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="row card-display justify-content-center">
-      <div class="col-sm-8">
-        <div class="card bg-light">
-          <div class="card-header text-white bg-info">
-            <strong>
-              ENTERPRISE
-            </strong>
-          </div>
-          <div class="card-body">
-            <p class="card-text">
-              <b-table :items="enterpriseItems" />
-            </p>
-          </div>
-        </div>
-      </div>
+    <div class="footer">
+      <p>
+        Group 6 INFO 3606 Final Project
+      </p>
     </div>
   </section>
 </template>

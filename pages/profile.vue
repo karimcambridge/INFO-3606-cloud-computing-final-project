@@ -1,5 +1,5 @@
 <template>
-  <section class="container-fluid">
+  <section class="container">
     <div class="header">
       <h2 class="subtitle">
         My Profile
