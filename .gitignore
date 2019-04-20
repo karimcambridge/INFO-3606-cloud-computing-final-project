@@ -1,4 +1,7 @@
-# Created by .ignore support plugin (hsz.mobi)
+### Aws
+# Keys
+*.pem
+
 ### Node template
 # Logs
 logs
