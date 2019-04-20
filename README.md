@@ -4,13 +4,13 @@
 
 ## AWS initalisation
 
-`setup.sh`
+`./deploy_aws/setup.sh`
 
 ## To delete the AWS CloudFormation stack and stop everything
 
-`delete.sh`
+`./deploy_aws/delete.sh`
 
-## Build Setup (If running NUXT in development)
+## Build Setup (If running NUXT for local development)
 
 ```powershell
 # install dependencies
@@ -32,7 +32,7 @@
 
 ## Credits
 
-> Build with ❤️ using [Nuxt.js](https://nuxtjs.org) and various other tools
+> Build with ❤️ using [Nuxt.js](https://nuxtjs.org) and various other tools.
 
 * Vue
 * VueX
@@ -44,4 +44,4 @@
 * docker-compose
 * Amazon Web Services
 
-> [Maya Bannis](https://github.com/Mibzahoy) for the idea
+> [Maya Bannis](https://github.com/Mibzahoy) for the idea.
