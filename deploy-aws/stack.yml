@@ -49,17 +49,44 @@ Resources:
       DBInstanceClass: db.t2.micro
       AllocatedStorage: '5'
       DBSecurityGroups:
-        - !Ref DatabaseSG
-  DatabaseSG:
+        - !Ref DatabaseSecurityGroup
+  DatabaseSecurityGroup:
     Type: AWS::RDS::DBSecurityGroup
     Properties:
       GroupDescription: Security Group for RDS public access
       DBSecurityGroupIngress:
         - CIDRIP: 0.0.0.0/0
-  VPCInstance:
+        FromPort: '3306'
+        ToPort: '3306'
+  EC2VpcLink:
+    Type: AWS::ApiGateway::VpcLink
+    Properties:
+      Description: VPC Link
+      Name: API VPC Link
+      TargetArns:
+        - EC2ElasticLoadBalancer
+  EC2ElasticLoadBalancer:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Type: network
+      Subnets:
+          - !Ref EC2Subnet
+  EC2Subnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref EC2VPC
+      CidrBlock: 10.0.0.0/24
+  EC2VPC:
     Type: AWS::EC2::VPC
-    Properties: 
-      CidrBlock: 0.0.0.0/0
+    Properties:
+      CidrBlock: 10.0.0.0/16
       EnableDnsSupport: true
       EnableDnsHostnames: true
       InstanceTenancy: "default"
+  EC2InternetGateway:
+    Type: AWS::EC2::InternetGateway
+  EC2InternetGatewayAttachment:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref EC2VPC
+      InternetGatewayId: !Ref EC2InternetGateway
