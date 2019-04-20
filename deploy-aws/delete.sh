@@ -1,4 +1,4 @@
 #!/bin/bash
 
 aws cloudformation delete-stack \
-    --stack-name stack --region us-east-1
+    --stack-name project --region us-east-1
