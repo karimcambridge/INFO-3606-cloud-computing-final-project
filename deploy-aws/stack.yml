@@ -1,14 +1,13 @@
-
 Resources:
-  AppNode:
-    Type: AWS::EC2::Instance
-    Properties:
-      InstanceType: t2.micro
-      ImageId: ami-0a313d6098716f372
-      KeyName: group6-project
-      SecurityGroups:
-        - !Ref AppNodeSG
-      UserData: !Base64 |
+    EC2Instance:
+        Type: 'AWS::EC2::Instance'
+        Properties:
+        InstanceType: t2.micro
+        SecurityGroups:
+            - !Ref InstanceSecurityGroup
+        KeyName: group6-project
+        ImageId: ami-0a313d6098716f372 
+        UserData: !Base64 |
         #!/bin/bash
         sudo apt-get update
         sudo apt-get install -y apt-transport-https ca-certificates
@@ -23,38 +22,41 @@ Resources:
         sudo printf "[Service]\nExecStart=\nExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2375\n" >>  /etc/systemd/system/docker.service.d/docker.conf
         sudo systemctl daemon-reload
         sudo systemctl restart docker
-  AppNodeSG:
-    Type: AWS::EC2::SecurityGroup
-    Properties:
-      GroupDescription: Security Group for the app nodes that allow http, ssh and docker ports
-      SecurityGroupIngress:
-      - IpProtocol: tcp
-        FromPort: '80'
-        ToPort: '80'
-        CidrIp: 0.0.0.0/0
-      - IpProtocol: tcp
-        FromPort: '22'
-        ToPort: '22'
-        CidrIp: 0.0.0.0/0
-      - IpProtocol: tcp
-        FromPort: '2375'
-        ToPort: '2375'
-        CidrIp: 0.0.0.0/0
-  DatabaseInstance:
-    Type: AWS::RDS::DBInstance
-    Properties:
-      DBName: "group6db"
-      Engine: MySQL
-      MasterUsername: group6user
-      MasterUserPassword: group6password
-      DBInstanceClass: db.t2.micro
-      AllocatedStorage: '5'
-      DBSecurityGroups:
-        - !Ref DatabaseSG
-  DatabaseSG:
+
+    InstanceSecurityGroup:
+        Type: 'AWS::EC2::SecurityGroup'
+        Properties:
+        GroupDescription: Enable SSH,HTTP,DOCKER
+        SecurityGroupIngress:
+           - IpProtocol: tcp
+            FromPort: '80'
+            ToPort: '80'
+            CidrIp: 0.0.0.0/0
+          - IpProtocol: tcp
+            FromPort: '22'
+            ToPort: '22'
+            CidrIp: 0.0.0.0/0
+          - IpProtocol: tcp
+            FromPort: '2375'
+            ToPort: '2375'
+            CidrIp: 0.0.0.0/0
+    
+    DatabaseInstance:
+        Type: 'AWS::RDS::DBInstance'
+        Properties:
+        DBName: "group6db"
+        AllocatedStorage: '5'
+        DBInstanceClass: db.t2.micro
+        Engine: MySQL
+        MasterUsername: group6user
+        MasterUserPassword: group6password
+        DBSecurityGroups: !Ref RSDSecurityGroup
+
+    RSDSecurityGroup:
     Type: AWS::RDS::DBSecurityGroup
     Properties:
       GroupDescription: Security Group for RDS public access
-      DBSecurityGroupIngress:
-        - CIDRIP: 0.0.0.0/0
-
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: '3306'
+        ToPort: '3306'
