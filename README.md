@@ -4,11 +4,11 @@
 
 ## AWS initalisation
 
-`./deploy_aws/setup.sh`
+`./deploy-aws/setup.sh`
 
 ## To delete the AWS CloudFormation stack and stop everything
 
-`./deploy_aws/delete.sh`
+`./deploy-aws/delete.sh`
 
 ## Build Setup (If running NUXT for local development)
 
