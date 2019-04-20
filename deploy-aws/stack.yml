@@ -1,4 +1,3 @@
-
 Resources:
   AppNode:
     Type: AWS::EC2::Instance
@@ -57,4 +56,10 @@ Resources:
       GroupDescription: Security Group for RDS public access
       DBSecurityGroupIngress:
         - CIDRIP: 0.0.0.0/0
-
+  VPCInstance:
+    Type: AWS::EC2::VPC
+    Properties: 
+      CidrBlock: 0.0.0.0/0
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      InstanceTenancy: "default"
