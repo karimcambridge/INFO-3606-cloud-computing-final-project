@@ -1,12 +1,12 @@
 Resources:
-  AppNode:
+  EC2Instance:
     Type: AWS::EC2::Instance
     Properties:
       InstanceType: t2.micro
       ImageId: ami-0a313d6098716f372
       KeyName: group6-project
       SecurityGroups:
-        - !Ref AppNodeSG
+        - !Ref InstanceSecurityGroup
       UserData: !Base64 |
         #!/bin/bash
         sudo apt-get update
@@ -22,7 +22,7 @@ Resources:
         sudo printf "[Service]\nExecStart=\nExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2375\n" >>  /etc/systemd/system/docker.service.d/docker.conf
         sudo systemctl daemon-reload
         sudo systemctl restart docker
-  AppNodeSG:
+  InstanceSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: Security Group for the app nodes that allow http, ssh and docker ports
