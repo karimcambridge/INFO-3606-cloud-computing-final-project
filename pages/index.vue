@@ -80,25 +80,27 @@
           </div>
         </div>
       </div>
-      <div v-if="$auth.user" class="debugging">
-        <button @click="getAllUsers">
-          Get All Users
-        </button>
-        <div v-if="users">
-          <ul>
-            <div v-for="user in users" :key="user.id">
-              <li>
-                {{ user.username }}
-              </li>
-            </div>
-          </ul>
+      <div v-if="debugMode" class="debugging">
+        <div v-if="$auth.user">
+          <button @click="getAllUsers">
+            Get All Users
+          </button>
+          <div v-if="users">
+            <ul>
+              <div v-for="user in users" :key="user.id">
+                <li>
+                  {{ user.username }}
+                </li>
+              </div>
+            </ul>
+          </div>
         </div>
+        <h1>
+          {{ typeof $auth.user }}
+          {{ $auth.$state.loggedIn }}
+          {{ $auth.loggedIn }}
+        </h1>
       </div>
-      <h1>
-        {{ typeof $auth.user }}
-        {{ $auth.$state.loggedIn }}
-        {{ $auth.loggedIn }}
-      </h1>
     </div>
     <div class="footer">
       <p>
@@ -113,7 +115,8 @@ export default {
   layout: 'nav',
   data() {
     return {
-      users: null
+      users: null,
+      debugMode: false
     }
   },
   methods: {

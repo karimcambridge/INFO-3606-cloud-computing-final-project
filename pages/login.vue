@@ -80,22 +80,6 @@ export default {
 </script>
 
 <style>
-html {
-  background-color: #56baed;
-}
-
-body {
-  font-family: "Poppins", sans-serif;
-  height: 100vh;
-}
-
-a {
-  color: #92badd;
-  display:inline-block;
-  text-decoration: none;
-  font-weight: 400;
-}
-
 h2 {
   text-align: center;
   font-size: 16px;
