@@ -22,6 +22,13 @@ Resources:
         sudo printf "[Service]\nExecStart=\nExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2375\n" >>  /etc/systemd/system/docker.service.d/docker.conf
         sudo systemctl daemon-reload
         sudo systemctl restart docker
+        sudo docker pull mibzy/awsProject:latest
+        cd mibzy/awsProject
+        sudo apt-get install nodejs npm
+        sudo npm install
+        sudo npm run migration
+        sudo npm run build
+        sudo npm start
   InstanceSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:

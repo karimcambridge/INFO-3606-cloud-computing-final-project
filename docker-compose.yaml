@@ -3,7 +3,7 @@ services:
   dev:
     build:
       context: .
-    image:mibzy/awsProject:1.0  
+    image: mibzy/awsProject:1.0
     volumes:
       - nodemodules:/usr/src/app/node_modules
       - .:/usr/src/app
