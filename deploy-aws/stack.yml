@@ -26,7 +26,7 @@ Resources:
   AppNodeSG:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: for the app nodes that allow ssh, http and docker ports
+      GroupDescription: Security Group for the app nodes that allow http, ssh and docker ports
       SecurityGroupIngress:
       - IpProtocol: tcp
         FromPort: '80'
@@ -37,13 +37,13 @@ Resources:
         ToPort: '22'
         CidrIp: 0.0.0.0/0
       - IpProtocol: tcp
-        FromPort: '3000'
-        ToPort: '3000'
+        FromPort: '2375'
+        ToPort: '2375'
         CidrIp: 0.0.0.0/0
   DatabaseInstance:
     Type: AWS::RDS::DBInstance
     Properties:
-      DBName: "blog"
+      DBName: "group6db"
       Engine: MySQL
       MasterUsername: group6user
       MasterUserPassword: group6password
