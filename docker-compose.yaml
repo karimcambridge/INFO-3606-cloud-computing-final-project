@@ -1,7 +1,9 @@
 version: '3'
 services:
   dev:
-    image: node:11
+    build:
+      context: .
+    image:mibzy/awsProject:1.0  
     volumes:
       - nodemodules:/usr/src/app/node_modules
       - .:/usr/src/app
