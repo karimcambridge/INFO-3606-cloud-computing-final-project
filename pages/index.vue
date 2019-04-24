@@ -101,6 +101,9 @@
           {{ $auth.loggedIn }}
         </h1>
       </div>
+      <div v-if="$store.state.customAuth.user">
+        {{ $store.state.customAuth.user.username }}
+      </div>
     </div>
     <div class="footer">
       <p>
@@ -119,6 +122,11 @@ export default {
       debugMode: false
     }
   },
+  computed: {
+    myUser() {
+      return this.$store.state.customAuth.user;
+    }
+  },
   methods: {
     async getAllUsers() {
       await this.$axios.$get(`server/api/get-all-users`).then(res => {
@@ -132,6 +140,6 @@ export default {
 
 <style>
 .debugging {
-  padding-top: 15vh;
+  padding-top: 5vh;
 }
 </style>

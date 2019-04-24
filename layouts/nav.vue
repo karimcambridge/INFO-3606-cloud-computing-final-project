@@ -54,6 +54,7 @@ export default {
   methods: {
     async logout() {
       await this.$auth.logout();
+      this.$store.commit('customAuth/reset');
     }
   }
 };

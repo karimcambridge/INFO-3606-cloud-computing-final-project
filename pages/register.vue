@@ -82,11 +82,15 @@ export default {
               password: this.password
             }
           }).then(user => {
+            const setUser = {
+              username: this.username,
+              email: this.email,
+              password: this.password
+            };
+            this.$store.commit('customAuth/set', setUser);
             this.$toast.success('Registered successfully', {icon: "done"});
-            console.log('Registered!');
-            console.log(this.$auth.user);
-            console.log(this.$auth.$state.loggedIn);
             this.$router.push('/');
+            console.log('Registered!' + JSON.stringify(setUser));
           });
         }).catch(err => {
           console.log('Registration failed: ' + err); // .response.data.error.message

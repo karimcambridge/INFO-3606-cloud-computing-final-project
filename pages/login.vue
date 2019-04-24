@@ -63,6 +63,12 @@ export default {
             login: this.login,
             password: this.password
           }
+        }).then(user => {
+          const setUser = {
+            username: this.login,
+            password: this.password
+          };
+          this.$store.commit('customAuth/set', setUser);
         }).catch(e => {
           // this.$toast.error('Logging in failed, please try again', {icon: "error_outline"});
           this.$toast.error('Invalid credentials, please try again', {icon: "clear"});
