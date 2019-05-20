@@ -10,13 +10,13 @@
         <strong>
           Username:
         </strong>
-        {{ $auth.user.username }}
+        {{ myUser.username }}
       </p>
       <p>
         <strong>
           Email:
         </strong>
-        {{ $auth.user.email }}
+        {{ myUser.email }}
       </p>
     </div>
   </section>
@@ -25,6 +25,11 @@
 <script>
 export default {
   layout: 'nav',
-  middleware: 'auth'
+  middleware: 'auth',
+  computed: {
+    myUser() {
+      return this.$store.state.customAuth.user;
+    }
+  }
 }
 </script>

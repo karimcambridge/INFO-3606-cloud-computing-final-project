@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const jwt = require('express-jwt');
 const jsonwebtoken = require('jsonwebtoken');
 const db = require('../db/models/index.js');
 
@@ -52,7 +51,7 @@ app.get('/auth/user', (req, res, next) => {
             res.send(err);
         });
     */
-   res.json( {user: { username: 'test', email: 'test@test.com' }} );
+   res.json({user: { username: 'test', email: 'test@test.com' }}); // dummy user to trick @nuxt/auth
 })
 
 app.post('/auth/login', async (req, res, next) => {

@@ -81,7 +81,7 @@
         </div>
       </div>
       <div v-if="debugMode" class="debugging">
-        <div v-if="$auth.user">
+        <div v-if="myUser">
           <button @click="getAllUsers">
             Get All Users
           </button>
@@ -96,13 +96,11 @@
           </div>
         </div>
         <h1>
-          {{ typeof $auth.user }}
-          {{ $auth.$state.loggedIn }}
-          {{ $auth.loggedIn }}
+          user: {{ typeof myUser }} ( {{ myUser }} ) |
+          isUserLoggedIn: {{ isUserLoggedIn }} |
+          state.loggedIn: {{ $auth.$state.loggedIn }} |
+          loggedIn: {{ $auth.loggedIn }}
         </h1>
-      </div>
-      <div v-if="$store.state.customAuth.user">
-        {{ $store.state.customAuth.user.username }}
       </div>
     </div>
     <div class="footer">
@@ -119,10 +117,13 @@ export default {
   data() {
     return {
       users: null,
-      debugMode: false
+      debugMode: true
     }
   },
   computed: {
+    isUserLoggedIn() {
+      return this.$store.state.customAuth.user !== null;
+    },
     myUser() {
       return this.$store.state.customAuth.user;
     }

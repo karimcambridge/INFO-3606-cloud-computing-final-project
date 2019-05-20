@@ -19,12 +19,12 @@
           </b-navbar-nav>
           <!-- Right aligned nav items -->
           <b-navbar-nav class="ml-auto">
-            <div v-if="$auth.$state.loggedIn">
+            <div v-if="isUserLoggedIn">
               <b-nav-item-dropdown right>
                 <!-- Using 'button-content' slot -->
                 <template slot="button-content">
                   <em>
-                    <font-awesome-icon icon="user" /> {{ $auth.user.username }}
+                    <font-awesome-icon icon="user" /> {{ myUser.username }}
                   </em>
                 </template>
                 <b-dropdown-item href="/profile">
@@ -51,6 +51,14 @@
 <script>
 export default {
   layout: 'nav',
+  computed: {
+    isUserLoggedIn() {
+      return this.$store.state.customAuth.user !== null;
+    },
+    myUser() {
+      return this.$store.state.customAuth.user;
+    }
+  },
   methods: {
     async logout() {
       await this.$auth.logout();
