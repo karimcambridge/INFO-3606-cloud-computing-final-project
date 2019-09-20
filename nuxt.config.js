@@ -85,7 +85,7 @@ export default {
         endpoints: {
           login: { url: '/server/api/auth/login', method: 'post', propertyName: 'token.accessToken' },
           logout: { url: '/server/api/auth/logout', method: 'post' },
-          user: { url: '/server/api/auth/user', method: 'get', propertyName: 'user' }
+          user: { url: '/server/api/auth/user', method: 'get' }
         }
       }
     }
